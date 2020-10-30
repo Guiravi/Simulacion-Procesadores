@@ -14,6 +14,9 @@ class Computer:
         processor = Processor(output_dist)
         self.processors_list.append(processor)
 
+    def get_processor(self, index):
+        return self.processors_list[index]
+
     def get_input_distribution(self):
         return self.input_distribution
 

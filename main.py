@@ -10,6 +10,10 @@ computer_2 = Computer
 computer_3 = Computer
 
 
+def test():
+    print("Test")
+
+
 # GENERADORES DE DISTRIBUCIONES
 def generate_d1():
     return 0
@@ -60,7 +64,7 @@ def LMC1(event):
     clock = event.get_arrival_time()
 
     # Se verifica si el procesador está ocupado
-    if computer_1.empty():
+    if computer_1.get_processor(0).empty():
         time = generate_d6()  # Se genera el tiempo aleatorio según la distribución D6
         event.message.insert_departure_time(clock + time)  # Se ingresa cuando se terminara de procesar el mensage
         event_new = Event(event.get_message(), clock + time, 1)  # Se crea el evento SMC1
@@ -75,37 +79,38 @@ def SMC1(event):
     return
 
 
-def initialize():
+def initialize(d1, d2, d3, d4, d5, d6):
     global computer_1
     global computer_2
     global computer_3
 
+    # Se añaden las computadoras con cada una de sus respectivas distribuciones
     computer_1 = Computer(-1)
     computer_2 = Computer(1)
     computer_3 = Computer(4)
 
+    # Se añaden los procesadores con cada una de sus respectivas distribuciones
     computer_1.add_processor(6)
     computer_2.add_processor(2)
     computer_2.add_processor(3)
     computer_3.add_processor(5)
 
 
-def test():
-    initialize()
-    print("Test")
+def check_simulation():
+    print("hola")
 
 
 def final_statistics():
     return
 
 
-def simulation(amount_simulations, time):
+def simulation(amount_simulations, time, d1, d2, d3, d4, d5, d6):
     global clock
     global event_queue
 
     # Ciclo para correr la cantidad de simulaciones indicada
     for i in range(amount_simulations):
-        initialize()
+        initialize(d1, d2, d3, d4, d5, d6)
         clock = 0.0
         while clock < time:
             # se busca el mínimo
