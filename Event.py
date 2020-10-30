@@ -2,9 +2,9 @@ from Message import Message
 
 
 class Event:
-    message = Message
-    arrival_time = 0.0
-    type = 0
+    message = Message       # Mensaje
+    arrival_time = 0.0      # Tiempo en el que ocurre el evento
+    type = 0                # Identificado de evento
 
     def __init__(self, msg, arrival_time, type):
         self.msg = msg
