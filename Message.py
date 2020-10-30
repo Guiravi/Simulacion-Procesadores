@@ -42,8 +42,8 @@ class Message:
         self.amount_returned = self.amount_returned + 1
         return self.amount_returned
 
-    def insert_arrival_time(self, time):
+    def set_arrival_time(self, time):
         self.arrival_time = time
 
-    def insert_departure_time(self, time):
+    def set_departure_time(self, time):
         self.departure_time = time
