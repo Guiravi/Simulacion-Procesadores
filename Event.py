@@ -1,18 +1,31 @@
+# consultar profe: Valores iniciales para LMC2 y LMC3 de mensajes nuevos... ambos en 0?
+# Consultar profe: Cuando reloj > que tiempo simulacion... se usa tiempo de simulacion para calcular tiempos finales?
+
 class Event:
 
-    def __init__(self, message, arrival_time, id_event):
-        self.message = message              # Mensaje
-        self.arrival_time = arrival_time    # Tiempo en el que ocurre el evento
-        self.id_event = id_event            # Identificado de evento
+    def __init__(self, _id_event, _event_time):
+        self._id_event = _id_event            # Identificador de evento (LMC1 SMC1 LMC2 SMC2P1 SMC2P2 LMC3 SMC3)
+        self._id_message = None           # Identificador del mensaje con el que se realiza el evento
+        self._event_time = _event_time    # Tiempo en el que ocurre el evento
 
-    def get_arrival_time(self):
-        return self.arrival_time
+    @property
+    def id_event(self):
+        return self._id_event
 
-    def get_message(self):
-        return self.message
+    @property
+    def id_message(self):
+        return self._id_message
 
-    def set_type(self, id_event):
-        self.id_event = id_event
+    @id_message.setter
+    def id_message(self, value):
+        self._id_message = value
 
-    def set_arrival_time(self, time):
-        self.arrival_time = time
+    @property
+    def event_time(self):
+        return self._event_time
+
+    @event_time.setter
+    def event_time(self, value):
+        self._event_time = value
+
+    
