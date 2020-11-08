@@ -13,7 +13,7 @@ distri = { 1 : "Normal método directo",
            2 : "Normal método de la convolución",
            3 : "Uniforme",
            4 : "Exponencial",
-           5 : "Densidad"}
+           5 : "Función de Densidad f(x) = kx"}
 
 # GENERADORES DE DISTRIBUCIONES
 def generate_time(distribution):
