@@ -1,31 +1,35 @@
 class Processor:
 
-    def __init__(self, output_distribution):
-        self.empty = True                               # Estado del procesador (libre u ocupado)
-        self.processing_time = 0.0                      # Tiempo de procesamiento
-        self.processing_time_rejected_message = 0.0     # Tiempo procesando mensajes rechazados
-        self.output_distribution = output_distribution  # Distribución de salida de mensajes
-        return
+    def __init__(self, _id, _output_distribution):
+        self._id = _id                                  # Identificador del procesador
+        self._busy_status = False                        # Estado del procesador (libre u ocupado)
+        self._processing_time = 0.0                      # Tiempo que el procesador pasa ocupado
+        self._output_distribution = _output_distribution  # Distribución de salida de mensajes
 
-    def change_state(self):
-        self.empty = not self.empty
+    @property
+    def id(self):
+        return self._id
 
-    def empty(self):
-        return self.empty
+    @property
+    def busy_status(self):
+        return self._busy_status
 
-    def add_processing_time(self, time):
-        self.processing_time = self.processing_time + time
-        return self.processing_time
+    @busy_status.setter
+    def busy_status(self, value):
+        self.busy_status = value
 
-    def get_processing_time(self):
-        return self.processing_time
+    @property
+    def processing_time(self):
+        return self._processing_time
 
-    def add_processing_time_rejected_message(self, time):
-        self.processing_time_rejected_message = self.processing_time_rejected_message + time
-        return self.processing_time_rejected_message
+    @processing_time.setter
+    def processing_time(self, value):
+        self._processing_time = value
 
-    def get_processing_time_rejected_message(self):
-        return self.processing_time_rejected_message
+    @property
+    def output_distribution(self):
+        return self._output_distribution
 
-    def get_output_distribution(self):
-        return self.output_distribution
+    @output_distribution.setter
+    def output_distribution(self, value):
+        self._output_distribution = value
