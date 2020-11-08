@@ -4,6 +4,7 @@ class Processor:
         self._id = _id                                  # Identificador del procesador
         self._busy_status = False                        # Estado del procesador (libre u ocupado)
         self._processing_time = 0.0                      # Tiempo que el procesador pasa ocupado
+        self._last_registered_clock = 0.0               # Ultimo tiempo de reloj registrado (para calcular tiempo de procesamiento del mensaje)
         self._output_distribution = _output_distribution  # Distribución de salida de mensajes
 
     @property
@@ -25,6 +26,14 @@ class Processor:
     @processing_time.setter
     def processing_time(self, value):
         self._processing_time = value
+
+    @property
+    def last_registered_clock(self):
+        return self._last_registered_clock
+
+    @last_registered_clock.setter
+    def last_registered_clock(self, value):
+        self._last_registered_clock = value
 
     @property
     def output_distribution(self):
