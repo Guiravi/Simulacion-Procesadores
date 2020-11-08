@@ -1,49 +1,116 @@
 class Message:
 
-    def __init__(self):
-        self.queue_time = 0.0       # Tiempo en cola
-        self.processing_time = 0.0  # Tiempo de procesamiento
-        self.system_time = 0.0      # Tiempo total en el sistema
-        self.amount_returned = 0    # Cantidad de veces retornado a computadora 2 o 3 respectivamente
-        self.arrival_time = 0.0     # Tiempo en el que empezó a ser procesado
-        self.departure_time = 0.0   # Tiempo en el que termina el procesamiento
+    def __init__(self, _id):
+        self._id = _id                           # Identificador del mensaje
+        self._status = "TBD"                     # Estado del mensaje: S=Sent, R=Rejected or TBD=To Be Defined
+        self._current_status_in_system = "TBD"   # Estado en el sistema: P=Processing, Q=Queued, T=Transmission or TBD=To Be Defined
+        self._first_computer = 0                 # La computadora original que recibio el mensaje (2 o 3)
+        self._last_computer = 0                  # La ultima computadora en la que estuvo el mensaje
+        self._processing_time_1 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 1
+        self._processing_time_2 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 2
+        self._processing_time_3 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 3
+        self._queue_time = 0.0                   # Tiempo en cola
+        self._tranmission_time = 0.0             # Tiempo en transmision
+        self._system_time = 0.0                  # Tiempo total en el sistema
+        self._amount_returned = 0                # Cantidad de veces retornado a computadora 2 o 3 respectivamente
+        self._last_registered_clock = 0          # Ultimo tiempo de reloj registrado (para calcular tiempo en cola o tiempo de procesamiento del mensaje)
 
-    def get_system_time(self):
-        return self.system_time
+    @property
+    def id(self):
+        return self._id
 
-    def get_processing_time(self):
-        return self.processing_time
+    @property
+    def status(self):
+        return self._status
 
-    def get_queue_time(self):
-        return self.queue_time
+    @status.setter
+    def status(self, value):
+        self._status = value
 
-    def get_system_time(self):
-        return self.system_time
+    @property
+    def current_status_in_system(self):
+        return self._current_status_in_system
 
-    def get_amount_returned(self):
-        return self.amount_returned
+    @current_status_in_system.setter
+    def current_status_in_system(self, value):
+        self._current_status_in_system = value
 
-    def get_departure_time(self):
-        return self.departure_time
+    @property
+    def first_computer(self):
+        return self._first_computer
 
-    def add_system_time(self, time):
-        self.system_time = self.system_time + time
-        return self.system_time
+    @first_computer.setter
+    def first_computer(self, value):
+        self._first_computer = value
 
-    def add_processing_time(self, time):
-        self.processing_time = self.processing_time + time
-        return self.processing_time
+    @property
+    def last_computer(self):
+        return self._last_computer
 
-    def add_queue_time(self, time):
-        self.queue_time = self.queue_time + time
-        return self.queue_time
+    @last_computer.setter
+    def last_computer(self, value):
+        self._last_computer = value
 
-    def add_amount_returned(self):
-        self.amount_returned = self.amount_returned + 1
-        return self.amount_returned
+    @property
+    def processing_time_1(self):
+        return self._processing_time_1
 
-    def set_arrival_time(self, time):
-        self.arrival_time = time
+    @processing_time_1.setter
+    def processing_time_1(self, value):
+        self._processing_time_1 = value
 
-    def set_departure_time(self, time):
-        self.departure_time = time
+    @property
+    def processing_time_2(self):
+        return self._processing_time_2
+
+    @processing_time_2.setter
+    def processing_time_2(self, value):
+        self._processing_time_2 = value
+
+    @property
+    def processing_time_3(self):
+        return self._processing_time_3
+
+    @processing_time_3.setter
+    def processing_time_3(self, value):
+        self._processing_time_3 = value
+
+    @property
+    def queue_time(self):
+        return self._queue_time
+
+    @queue_time.setter
+    def queue_time(self, value):
+        self._queue_time = value
+
+    @property
+    def tranmission_time(self):
+        return self._tranmission_time
+
+    @tranmission_time.setter
+    def tranmission_time(self, value):
+        self._tranmission_time = value
+
+    @property
+    def system_time(self):
+        return self._system_time
+
+    @system_time.setter
+    def system_time(self, value):
+        self._system_time = value
+
+    @property
+    def amount_returned(self):
+        return self._amount_returned
+
+    @amount_returned.setter
+    def amount_returned(self, value):
+        self._amount_returned = value
+
+    @property
+    def last_registered_clock(self):
+        return self._last_registered_clock
+
+    @last_registered_clock.setter
+    def last_registered_clock(self, value):
+        self._last_registered_clock = value
