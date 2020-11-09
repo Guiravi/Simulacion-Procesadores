@@ -1,3 +1,6 @@
+import math
+import random
+
 class Distribution:
 
     def __init__(self):
@@ -78,16 +81,33 @@ class Distribution:
             self.calculate_kx()
 
     def calculate_direct(self):
-        return
+        x = -1
+        while x < 0:
+            z = (math.sqrt(-2*math.log(random.random()))*math.cos(2*math.pi*random.random()))
+            x = self.miu + math.sqrt(self.sigma2)*z
+        return x
 
     def calculate_TLC(self):
-        return
+        x = -1
+        while x < 0:
+            R = 0.0
+            for i in range(12):
+                R = R + random.random() 
+            z = R - 6
+            x = self.miu + math.sqrt(self.sigma2)*z
+        return x
 
     def calculate_uniform(self):
-        return
+        return self.a + (self.b - self.a)*random.random()
 
     def calculate_exponential(self):
-        return
+        rand = 0.0
+        while rand == 0:
+            rand = random.random()
+        return ((-1 )/( self.lambd))*math.log(random.random())
 
     def calculate_kx(self):
-        return
+        x = self.a - 1
+        while not (self.a <= x <= self.b):
+            x = math.sqrt(((2*random.random())/(self.k)) + self.a**2)
+        return x
