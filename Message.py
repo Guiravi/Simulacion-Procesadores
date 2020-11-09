@@ -1,9 +1,10 @@
 class Message:
 
+    # Constructor
     def __init__(self, _id):
         self._id = _id                           # Identificador del mensaje
-        self._status = "TBD"                     # Estado del mensaje: S=Sent, R=Rejected or TBD=To Be Defined
-        self._current_status_in_system = "TBD"   # Estado en el sistema: P=Processing, Q=Queued, T=Transmission or TBD=To Be Defined
+        self._status = "TBD"                     # Estado del mensaje: S=Sent, R=Rejected o TBD=To Be Defined
+        self._current_status_in_system = "TBD"   # Estado en el sistema: P=Processing, Q=Queued, T=Transmission, E=Exited o TBD=To Be Defined
         self._first_computer = 0                 # La computadora original que recibio el mensaje (2 o 3)
         self._last_computer = 0                  # La ultima computadora en la que estuvo el mensaje
         self._processing_time_1 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 1
@@ -13,8 +14,10 @@ class Message:
         self._tranmission_time = 0.0             # Tiempo en transmision
         self._system_time = 0.0                  # Tiempo total en el sistema
         self._amount_returned = 0                # Cantidad de veces retornado a computadora 2 o 3 respectivamente
-        self._last_registered_clock = 0          # Ultimo tiempo de reloj registrado (para calcular tiempo en cola o tiempo de procesamiento del mensaje)
+        self._last_registered_clock = 0.0        # Ultimo tiempo de reloj registrado (para calcular tiempo en cola o tiempo de procesamiento del mensaje)
 
+
+    # --------------- Definición de Métodos Get y Set para atributos de clase Message --------------- #
     @property
     def id(self):
         return self._id
@@ -114,3 +117,5 @@ class Message:
     @last_registered_clock.setter
     def last_registered_clock(self, value):
         self._last_registered_clock = value
+
+    # --------------- FIN Definición de Métodos Get y Set para atributos de clase Message --------------- #

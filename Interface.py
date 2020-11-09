@@ -53,17 +53,67 @@ class Interface:
 
         return number
 
-    def ask_direct_method(self):
-        return
-    
-    def ask_tlc_method(self):
-        return
+    def ask_normal(self):
+        miu = None
+        sigma2 = None
+
+        while (miu == None):
+            miu = input("Digite el valor del parámetro Miu: ")
+
+            try:
+                miu = float(miu)
+            except ValueError:
+                print("Por favor digite un número válido\n")
+                miu = None
+
+        while (sigma2 == None):
+            sigma2 = input("Digite el valor del parámetro Sigma^2: ")
+
+            try:
+                sigma2 = float(sigma2)
+            except ValueError:
+                print("Por favor digite un número válido\n")
+                sigma2 = None
+        
+        return (miu, sigma2)
     
     def ask_uniform(self):
-        return
+        a = None
+        b = None
+
+        while (a == None):
+            a = input("Digite el valor del parámetro a: ")
+
+            try:
+                a = float(a)
+            except ValueError:
+                print("Por favor digite un número válido\n")
+                a = None
+
+        while (b == None):
+            b = input("Digite el valor del parámetro b: ")
+
+            try:
+                b = float(b)
+            except ValueError:
+                print("Por favor digite un número válido\n")
+                b = None
+        
+        return (a, b)
     
     def ask_exponential(self):
-        return
+        lambd = None
+
+        while (lambd == None):
+            lambd = input("Digite el valor del parámetro lambda: ")
+
+            try:
+                lambd = float(lambd)
+            except ValueError:
+                print("Por favor digite un número válido\n")
+                lambd = None
+
+        return lambd
     
     def ask_density(self):
         return

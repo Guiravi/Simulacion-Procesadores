@@ -1,12 +1,15 @@
 class Processor:
 
+    # Constructor
     def __init__(self, _id, _output_distribution):
-        self._id = _id                                  # Identificador del procesador
-        self._busy_status = False                        # Estado del procesador (libre u ocupado)
-        self._processing_time = 0.0                      # Tiempo que el procesador pasa ocupado
-        self._last_registered_clock = 0.0               # Ultimo tiempo de reloj registrado (para calcular tiempo de procesamiento del mensaje)
+        self._id = _id                                    # Identificador del procesador
+        self._busy_status = False                         # Estado del procesador (libre u ocupado)
+        self._processing_time = 0.0                       # Tiempo que el procesador pasa ocupado
+        self._last_registered_clock = 0.0                 # Ultimo tiempo de reloj registrado (para calcular tiempo de procesamiento del mensaje)
         self._output_distribution = _output_distribution  # Distribución de salida de mensajes
 
+
+    # --------------- Definición de Métodos Get y Set para atributos de clase Processor --------------- #
     @property
     def id(self):
         return self._id
@@ -42,3 +45,5 @@ class Processor:
     @output_distribution.setter
     def output_distribution(self, value):
         self._output_distribution = value
+
+    # --------------- FIN Definición de Métodos Get y Set para atributos de clase Processor --------------- #

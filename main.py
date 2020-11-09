@@ -9,58 +9,6 @@ computer_1 = Computer
 computer_2 = Computer
 computer_3 = Computer
 
-distri = { 1 : "Normal método directo",
-           2 : "Normal método de la convolución",
-           3 : "Uniforme",
-           4 : "Exponencial",
-           5 : "Función de Densidad f(x) = kx"}
-
-# GENERADORES DE DISTRIBUCIONES
-def generate_time(distribution):
-    i = distribution - 1
-    result = 0.0
-    if distribution_list[i] == 0:
-        print("Normal directo")
-        result = normal_direct()
-    elif distribution_list[i] == 1:
-        print("Normal convolución")
-        result = generate_d2()
-    elif distribution_list[i] == 2:
-        print("uniforme")
-        result = generate_d3()
-    elif distribution_list[i] == 3:
-        print("exponencial")
-        result = generate_d4()
-    elif distribution_list[i] == 4:
-        print("densidad")
-        result = generate_d5()
-    return result
-
-
-def normal_direct():
-    return 0
-
-
-def generate_d2():
-    return 0
-
-
-def generate_d3():
-    return 0
-
-
-def generate_d4():
-    return 0
-
-
-def generate_d5():
-    return 0
-
-
-def generate_d6():
-    return 0
-
-
 # GESTIÓN DE LA COLA DE EVENTOS
 def insert_event(event):
     event_queue.append(event)
@@ -78,7 +26,7 @@ def get_min():
 
 
 # IMPLEMENTACIÓN DE LOS EVENTOS
-def LMC1(event):
+def do_LMC1_event(event):
     global clock
     global event_queue
 

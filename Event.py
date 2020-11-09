@@ -1,6 +1,3 @@
-# consultar profe: Valores iniciales para LMC2 y LMC3 de mensajes nuevos... ambos en 0?
-# Consultar profe: Cuando reloj > que tiempo simulacion... se usa tiempo de simulacion para calcular tiempos finales?
-
 class Event:
 
     def __init__(self, _id_event, _event_time):
