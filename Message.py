@@ -4,7 +4,6 @@ class Message:
     def __init__(self, _id):
         self._id = _id                           # Identificador del mensaje
         self._status = "TBD"                     # Estado del mensaje: S=Sent, R=Rejected o TBD=To Be Defined
-        self._current_status_in_system = "TBD"   # Estado en el sistema: P=Processing, Q=Queued, T=Transmission, E=Exited o TBD=To Be Defined
         self._first_computer = 0                 # La computadora original que recibio el mensaje (2 o 3)
         self._last_computer = 0                  # La ultima computadora en la que estuvo el mensaje
         self._processing_time_1 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 1
@@ -30,14 +29,6 @@ class Message:
     @status.setter
     def status(self, value):
         self._status = value
-
-    @property
-    def current_status_in_system(self):
-        return self._current_status_in_system
-
-    @current_status_in_system.setter
-    def current_status_in_system(self, value):
-        self._current_status_in_system = value
 
     @property
     def first_computer(self):
