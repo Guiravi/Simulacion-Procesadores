@@ -1,5 +1,7 @@
 class Event:
-
+    """
+    Clase Evento. Se utiliza para indicar el tipo de evento que se debe ejecutar, el mensaje correspondiente al evento y el tiempo de ocurrencia
+    """
     def __init__(self, _id_event, _event_time):
         self._id_event = _id_event            # Identificador de evento (LMC1 SMC1 LMC2 SMC2P1 SMC2P2 LMC3 SMC3)
         self._id_message = None           # Identificador del mensaje con el que se realiza el evento

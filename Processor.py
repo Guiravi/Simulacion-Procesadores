@@ -1,5 +1,8 @@
 class Processor:
 
+    """
+    Clase Procesador. Se utiliza para guardar las estadísticas de cada procesador. También contiene la distribución que utiliza para el tiempo de procesamiento
+    """
     # Constructor
     def __init__(self, _id, _output_distribution):
         self._id = _id                                    # Identificador del procesador
@@ -48,10 +51,10 @@ class Processor:
         self._output_distribution = value
 
     # --------------- FIN Definición de Métodos Get y Set para atributos de clase Processor --------------- #
-
-    """
-    Se añade el tiempo que se gastó en procesamiento, restándole al 
-    reloj actual el tiempo en que empezó a procesar el mensaje
-    """
     def update_processing_time(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que se gastó en procesamiento, restándole al 
+        reloj actual el tiempo en que empezó a procesar el mensaje
+        """
         self.processing_time += (current_clock - self.last_registered_clock)

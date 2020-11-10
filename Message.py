@@ -1,5 +1,7 @@
 class Message:
-
+    """
+    Clase Mensaje. Se utiliza para guardar las estadísticas relacionadas a los Mensajes
+    """
     # Constructor
     def __init__(self, _id):
         self._id = _id                           # Identificador del mensaje
@@ -112,49 +114,56 @@ class Message:
 
     # --------------- FIN Definición de Métodos Get y Set para atributos de clase Message --------------- #
 
-    """
-    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 1, restándole al 
-    reloj actual el tiempo en que empezó a procesar
-    """
     def update_processing_time_1(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que duró el procesamiento del mensaje en la computadora 1, restándole al 
+        reloj actual el tiempo en que empezó a procesar
+        """
         self._processing_time_1 += (current_clock - self._last_registered_clock)
 
-    """
-    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 2, restándole al 
-    reloj actual el tiempo en que empezó a procesar
-    """
     def update_processing_time_2(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que duró el procesamiento del mensaje en la computadora 2, restándole al 
+        reloj actual el tiempo en que empezó a procesar
+        """
         self._processing_time_2 += (current_clock - self._last_registered_clock)
 
-    """
-    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 3, restándole al 
-    reloj actual el tiempo en que empezó a procesar
-    """
     def update_processing_time_3(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que duró el procesamiento del mensaje en la computadora 3, restándole al 
+        reloj actual el tiempo en que empezó a procesar
+        """
         self._processing_time_3 += (current_clock - self._last_registered_clock)
 
-    """
-    Se añade el tiempo que duró en cola el mensaje, restándole al reloj actual el tiempo 
-    en que empezó a esperar en cola
-    """
     def update_queue_time(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que duró en cola el mensaje, restándole al reloj actual el tiempo 
+        en que empezó a esperar en cola
+        """
         self._queue_time += (current_clock - self._last_registered_clock)
 
-    """
-    Se añade el tiempo que duró el procesamiento del mensaje o el tiempo en cola, al tiempo total en el sistema. 
-    """
     def update_system_time(self, current_clock):
+        """
+        Método de clase
+        Se añade el tiempo que duró el procesamiento del mensaje o el tiempo en cola, al tiempo total en el sistema. 
+        """
         self._system_time += (current_clock - self._last_registered_clock)
 
-    """
-    Se coloca el estado del mensaje en enviado
-    """
     def send(self):
+        """
+        Método de clase
+        Se coloca el estado del mensaje en enviado
+        """
         self._status = "S"
     
-    """
-    Se coloca el estado del mensaje en rechazado
-    """
     def reject(self):
+        """
+        Método de clase
+        Se coloca el estado del mensaje en rechazado
+        """
         self._status = "R"
     

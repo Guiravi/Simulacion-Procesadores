@@ -1,5 +1,11 @@
 import math
 class Results:
+    """
+    Clase Resultados. Esta clase se utiliza para guardar y calcular las estadísticas finales de cada corrida.
+    Como se guarda cada corrida, al finalizar todas las ejecuciones, también calcula las estadísticas finales tomando en cuenta todas las corridas.
+    """
+
+    # Constructor
     def __init__(self):
         self.processor_0_busy_time = []    # Tiempo en el que el procesador de la computadora 1 pasó ocupado en procesamiento
         self.processor_1_busy_time = []    # Tiempo en el que el procesador 1 de la computadora 2 pasó ocupado en procesamiento

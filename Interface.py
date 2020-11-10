@@ -12,9 +12,15 @@ def clear():
         
 
 class Interface:
-
+    """
+    Clase Interfaz. Se utiliza para controlar la interfaz de consola y la interacción con el usuario.
+    """
 
     def ask_number_of_runs(self):
+        """
+        Método para preguntar el número de corridas
+        """
+
         number = 0
         while(number <= 0):
             number = input("Digite el número de veces que se va a correr la simuación: ")
@@ -32,6 +38,9 @@ class Interface:
         return number
 
     def ask_simulation_time(self):
+        """
+        Método para preguntar el tiempo de simulación
+        """
         number = 0
         while(number <= 0):
             number = input("Digite el tiempo por el que se debe ejecutar la simulación en segundos: ")
@@ -47,6 +56,9 @@ class Interface:
         return number
 
     def ask_distribution(self, dist_number):
+        """
+        Método para preguntar la distribución a utilizar en D1, D2, D3, D4 y D5
+        """
         number = 0
         while(number <= 0 or number >= 6):
             print("Seleccione la distribución que desea utilizar para " + dist_number + ": \n" +
@@ -68,6 +80,10 @@ class Interface:
         return number
 
     def ask_normal(self):
+        """
+        Método para consultar los parámetros miu y sigma^2 de la distribución normal
+        """
+
         miu = None
         sigma2 = None
 
@@ -90,6 +106,10 @@ class Interface:
         return (miu, sigma2)
 
     def ask_uniform(self):
+        """
+        Método para consultar los parámetros a y b de la distribución uniforme
+        """
+
         a = None
         b = None
 
@@ -103,12 +123,12 @@ class Interface:
                 a = None
 
         while (b == None):
-            b = input("Digite el valor del parámetro b que sea mayor que a (%f): " % a)
+            b = input("Digite el valor del parámetro b que sea mayor que a (%.4f): " % a)
             clear()
             try:
                 b = float(b)
                 if(b <= a):
-                    print("Por favor digite un número mayor que a (%f)" % a)
+                    print("Por favor digite un número mayor que a (%.4f)" % a)
                     b = None
             except ValueError:
                 print("Por favor digite un número válido\n")
@@ -116,6 +136,10 @@ class Interface:
         return (a, b)
 
     def ask_exponential(self):
+        """
+        Método para preguntar el parámetro lambda de la distribución uniforme
+        """
+
         lambd = None
 
         while (lambd == None):
@@ -130,6 +154,10 @@ class Interface:
         return lambd
 
     def ask_density(self):
+        """
+        Método para consultar los parámetros k, a y b de la función de densidad f(x) = kx
+        """
+
         k = None
         a = None
         b = None
@@ -153,12 +181,12 @@ class Interface:
                 a = None
 
         while (b == None):
-            b = input("Digite el valor del parámetro b que sea mayor que a (%f): " % a)
+            b = input("Digite el valor del parámetro b que sea mayor que a (%.4f): " % a)
             clear()
             try:
                 b = float(b)
                 if(b <= a):
-                    print("Por favor digite un número mayor que a (%f)" % a)
+                    print("Por favor digite un número mayor que a (%.4f)" % a)
                     b = None
             except ValueError:
                 print("Por favor digite un número válido\n")
@@ -167,6 +195,10 @@ class Interface:
         return (k, a, b)
 
     def ask_x_probability(self, x_number):
+        """
+        Método para preguntar las probabilidades x1, x2 y x3
+        """
+
         probability = 0.0
 
         while (probability <= 0.0 or probability >= 100.0):

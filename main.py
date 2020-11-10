@@ -1,6 +1,9 @@
 from Simulation import Simulation
 
 def main():
+    """
+    Método main. Inicia el programa
+    """
     sim = Simulation()
     sim.run()
 

@@ -8,6 +8,11 @@ from Processor import Processor
 from Results import Results
 
 class Simulation:
+    """
+    Clase Simulación. En esta clase se controla la simulación basada en eventos.
+    En esta clase se implementan los métodos que se debe realizar para cada evento en específico (LMC1, LMC2, LMC3, SMC1, SMC2P1, SMC2P2, SCM3)
+    """
+    # Constructor
     def __init__(self):
         self.clock = 0.0                # Reloj de la simulacion
         self.number_of_runs = 0         # Cantidad de veces a ejecutar la simulacion
@@ -197,10 +202,10 @@ class Simulation:
                 if processor.busy_status == True:
                     processor.update_processing_time(self.clock)
 
-    """
-    Este es el método que ejecuta el evento llega mensaje a la computadora 1
-    """
     def do_LMC1_event(self):
+        """
+        Este es el método que ejecuta el evento llega mensaje a la computadora 1
+        """
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["LMC1"].event_time
         # Se obtiene el mensaje que está llegando a la computadora 1
@@ -240,10 +245,10 @@ class Simulation:
             # Se desprograma el evento LMC1
             self.event_list["LMC1"].event_time = self.max
 
-    """
-    Este es el método que ejecuta el evento llega mensaje a la computadora 2
-    """
     def do_LMC2_event(self):
+        """
+        Este es el método que ejecuta el evento llega mensaje a la computadora 2
+        """
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["LMC2"].event_time
         # Se obtiene el mensaje que está llegando a la computadora 2
@@ -307,10 +312,10 @@ class Simulation:
         self.event_list["LMC2"].id_message = next_event_parameters[0]
         self.event_list["LMC2"].event_time = next_event_parameters[1]
 
-    """
-    Este es el método que ejecuta el evento llega mensaje a la computadora 3
-    """
     def do_LMC3_event(self):
+        """
+        Este es el método que ejecuta el evento llega mensaje a la computadora 3
+        """
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["LMC3"].event_time
         # Se obtiene el mensaje que está llegando a la computadora 3
@@ -360,10 +365,10 @@ class Simulation:
 
         
 
-    """
-    Este es el método que ejecuta el evento sale mensaje de la computadora 1
-    """
     def do_SMC1_event(self):
+        """
+        Este es el método que ejecuta el evento sale mensaje de la computadora 1
+        """
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["SMC1"].event_time
         # Se obtiene el mensaje que debe salir de la computadora 1
@@ -426,10 +431,10 @@ class Simulation:
             # Se guarda el momento en el que el procesador empezó a procesar el mensaje
             self.computer_1.processors_list[0].last_registered_clock = self.clock
 
-    """
-    Este es el método que ejecuta el evento sale mensaje del procesador 1 computadora 2
-    """    
     def do_SMC2P1_event(self):
+        """
+        Este es el método que ejecuta el evento sale mensaje del procesador 1 computadora 2
+        """    
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["SMC2P1"].event_time
         # Se obtiene el mensaje que debe salir del procesador 1 de la computadora 2
@@ -470,10 +475,10 @@ class Simulation:
             # Se guarda el momento en el que el procesador empezó a procesar el mensaje
             self.computer_2.processors_list[0].last_registered_clock = self.clock
 
-    """
-    Este es el método que ejecuta el evento sale mensaje del procesador 2 computadora 2
-    """ 
     def do_SMC2P2_event(self):
+        """
+        Este es el método que ejecuta el evento sale mensaje del procesador 2 computadora 2
+        """ 
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["SMC2P2"].event_time
         # Se obtiene el mensaje que debe salir del procesador 2 de la computadora 2
@@ -513,11 +518,11 @@ class Simulation:
             next_message_to_process.last_registered_clock = self.clock
             # Se guarda el momento en el que el procesador empezó a procesar el mensaje
             self.computer_2.processors_list[1].last_registered_clock = self.clock
-
-    """
-    Este es el método que ejecuta el evento sale mensaje de la computadora 3
-    """
+    
     def do_SMC3_event(self):
+        """
+        Este es el método que ejecuta el evento sale mensaje de la computadora 3
+        """
         # Se actualiza el reloj al tiempo del evento
         self.clock = self.event_list["SMC3"].event_time
         # Se obtiene el mensaje que debe salir de la computadora 3
