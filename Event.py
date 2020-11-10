@@ -5,6 +5,8 @@ class Event:
         self._id_message = None           # Identificador del mensaje con el que se realiza el evento
         self._event_time = _event_time    # Tiempo en el que ocurre el evento
 
+    # --------------- Definición de Métodos Get y Set para atributos de clase Processor --------------- #
+
     @property
     def id_event(self):
         return self._id_event
@@ -25,4 +27,5 @@ class Event:
     def event_time(self, value):
         self._event_time = value
 
-    
+    # --------------- FIN Definición de Métodos Get y Set para atributos de clase Processor --------------- #
+ 

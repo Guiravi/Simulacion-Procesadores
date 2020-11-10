@@ -11,13 +11,14 @@ class Message:
         self._processing_time_2 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 2
         self._processing_time_3 = 0.0            # Tiempo de procesamiento que ha tenido el mensaje en la computadora 3
         self._queue_time = 0.0                   # Tiempo en cola
-        self._tranmission_time = 0.0             # Tiempo en transmision
+        self._transmission_time = 0.0             # Tiempo en transmision
         self._system_time = 0.0                  # Tiempo total en el sistema
         self._amount_returned = 0                # Cantidad de veces retornado a computadora 2 o 3 respectivamente
         self._last_registered_clock = 0.0        # Ultimo tiempo de reloj registrado (para calcular tiempo en cola o tiempo de procesamiento del mensaje)
 
 
     # --------------- Definición de Métodos Get y Set para atributos de clase Message --------------- #
+
     @property
     def id(self):
         return self._id
@@ -87,12 +88,12 @@ class Message:
         self._queue_time = value
 
     @property
-    def tranmission_time(self):
-        return self._tranmission_time
+    def transmission_time(self):
+        return self._transmission_time
 
-    @tranmission_time.setter
-    def tranmission_time(self, value):
-        self._tranmission_time = value
+    @transmission_time.setter
+    def transmission_time(self, value):
+        self._transmission_time = value
 
     @property
     def system_time(self):
@@ -119,3 +120,50 @@ class Message:
         self._last_registered_clock = value
 
     # --------------- FIN Definición de Métodos Get y Set para atributos de clase Message --------------- #
+
+    """
+    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 1, restándole al 
+    reloj actual el tiempo en que empezó a procesar
+    """
+    def update_processing_time_1(self, current_clock):
+        self._processing_time_1 += (current_clock - self._last_registered_clock)
+
+    """
+    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 2, restándole al 
+    reloj actual el tiempo en que empezó a procesar
+    """
+    def update_processing_time_2(self, current_clock):
+        self._processing_time_2 += (current_clock - self._last_registered_clock)
+
+    """
+    Se añade el tiempo que duró el procesamiento del mensaje en la computadora 3, restándole al 
+    reloj actual el tiempo en que empezó a procesar
+    """
+    def update_processing_time_3(self, current_clock):
+        self._processing_time_3 += (current_clock - self._last_registered_clock)
+
+    """
+    Se añade el tiempo que duró en cola el mensaje, restándole al reloj actual el tiempo 
+    en que empezó a esperar en cola
+    """
+    def update_queue_time(self, current_clock):
+        self._queue_time += (current_clock - self._last_registered_clock)
+
+    """
+    Se añade el tiempo que duró el procesamiento del mensaje o el tiempo en cola, al tiempo total en el sistema. 
+    """
+    def update_system_time(self, current_clock):
+        self._system_time += (current_clock - self._last_registered_clock)
+
+    """
+    Se coloca el estado del mensaje en enviado
+    """
+    def send(self):
+        self._status = "S"
+    
+    """
+    Se coloca el estado del mensaje en rechazado
+    """
+    def reject(self):
+        self._status = "R"
+    

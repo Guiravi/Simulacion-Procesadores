@@ -10,6 +10,7 @@ class Processor:
 
 
     # --------------- Definición de Métodos Get y Set para atributos de clase Processor --------------- #
+
     @property
     def id(self):
         return self._id
@@ -20,7 +21,7 @@ class Processor:
 
     @busy_status.setter
     def busy_status(self, value):
-        self.busy_status = value
+        self._busy_status = value
 
     @property
     def processing_time(self):
@@ -47,3 +48,10 @@ class Processor:
         self._output_distribution = value
 
     # --------------- FIN Definición de Métodos Get y Set para atributos de clase Processor --------------- #
+
+    """
+    Se añade el tiempo que se gastó en procesamiento, restándole al 
+    reloj actual el tiempo en que empezó a procesar el mensaje
+    """
+    def update_processing_time(self, current_clock):
+        self.processing_time += (current_clock - self.last_registered_clock)

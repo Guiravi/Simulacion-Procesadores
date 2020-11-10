@@ -180,3 +180,35 @@ class Interface:
                 print("Por favor digite un número válido\n")
                 probability = 0.0
         return probability
+
+    def print_number_of_run(self, run_number):
+        print("---------------------Corrida #%i---------------------\n" % run_number)
+    
+    def print_percentage_processor_busy(self, percentages):
+        print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 1: %.4f %%\n" % percentages[0])
+        print("Porcentaje del tiempo que pasa ocupado el procesador 1 de la Computadora 2: %.4f %%\n" % percentages[1])
+        print("Porcentaje del tiempo que pasa ocupado el procesador 2 de la Computadora 2: %.4f %%\n" % percentages[2])
+        print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 3: %.4f %%\n" % percentages[3])
+    
+    def print_percentage_processor_busy_rejected(self, percentages):
+        print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 1 en mensajes rechazados: %.4f %%\n" % percentages[0])
+        print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 3 en mensajes rechazados: %.4f %%\n" % percentages[1])
+    
+    def print_percentage_rejected_messages(self, percentage):
+        print("Porcentaje de mensajes que fueron rechazados: %.4f %%\n" % percentage)
+
+    def print_mean_system_time(self, mean):
+        print("Tiempo promedio en el sistema de los mensajes: %.4f s\n" % mean)
+
+    
+    def print_mean_amount_returned(self, amount):
+        print("Promedio de veces que fue devuelto un mensaje: %.4f \n" % amount)
+    
+    def print_mean_queue_time(self, mean):
+        print("Tiempo promedio en cola de los mensajes: %.4f s\n" % mean)
+    
+    def print_mean_transmission_time(self, mean):
+        print("Tiempo promedio en transmisión de los mensajes: %.4f s\n" % mean)
+
+    def print_percentage_in_processing_time(self, percentage):
+        print("Porcentaje del tiempo en que los mensajes pasaron en procesamiento: %.4f %%\n" % percentage)
