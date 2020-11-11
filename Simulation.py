@@ -38,20 +38,28 @@ class Simulation:
         self.computer_3 = None          # Instancia de la Computadora 3 de la Simulación
 
     def run(self):
+        """
+        Método de clase
+        En este método se hace el procesamiento general de la simulación
+        """
+        # Se solicitan y obtienen los datos de inicio al usuario
         self.get_user_input()
+        # Se crean los eventos iniciales
         self.createEvents()
+        # Se crean las computadoras y sus procesadores
         self.createComputers()
-
+        # Comienza las iteraciones por las n simulaciones indicadas por el usuario
         for i in range(self.number_of_runs):
+            # Se imprime el número de simulación
             self.interface.print_number_of_run(i)
-
+            # Se ingresan los primeros mensajes de llegada en la computadora 2 y 3 y se programan los eventos
             self.message_list.append(Message(0))
             self.message_list.append(Message(1))
             self.event_list["LMC2"].id_message = 0
             self.event_list["LMC3"].id_message = 1
             self.LMC2_list.append((0, 0))
             self.LMC3_list.append((1, 0))
-
+            # Se relizan de manera cíclica todos los eventos de la simulación
             self.do_events()
 
             # Guardar datos para calcular estadisticas
@@ -61,58 +69,90 @@ class Simulation:
             
             # Imprimir estadisticas
             self.printStatistics(i)
-            # Reset
+            # Se reinican los datos para una nueva corrida
             self.reset_run()
         # Calcular estadisticas de todas las corridas
         #Imprimir estadisticas finales
 
     def get_user_input(self):
+        """
+        Método de clase
+        Se obtienen cada uno de los datos del usuario necesarios para la simulación
+        """
+        # Se le solicita al usuario la cantidad de simulaciones
         self.number_of_runs = self.interface.ask_number_of_runs()
+        # Se le solicita al usuario el tiempo que debe durar cada simulación
         self.simulation_time = self.interface.ask_simulation_time()
+        # Se fija el valor de max o infinito en la simulación
         self.max = 4 * self.simulation_time  # Actualiza el valor de max
-
+        # Se piden los datos de cada una de las distribuciones
         self.set_simulation_distributions()
 
+        # Se asignan las probabilidades de retorno o rechazo de un mensaje por parte de los procesadores
         self.x1_probability = self.interface.ask_x_probability(1)
         self.x2_probability = self.interface.ask_x_probability(2)
         self.x3_probability = self.interface.ask_x_probability(3)
 
     def set_simulation_distributions(self):
+        """
+        Método de clase
+        Se inicializan cada una de las simulaciones y sus respectivos parámetros
+        """
+        # Se crea un diccionario para manejar los identificadores de cada distribución
         distribution_dictionary = {1: "Direct",
                                    2: "TLC",
                                    3: "Uniform",
                                    4: "Exponential",
                                    5: "Density"}
+        # Se realiza la solicitud de los datos de cada una de las 6 distribuciones
         for i in range(6):
             dist = Distribution()
+            # Se pregunta cual distribución desa asignar a la distribución de la simulación: D_i 
             option = self.interface.ask_distribution("D" + str(i+1))
+            # Según la distribución señalada entonces se asígna el identificador
             dist.id = distribution_dictionary[option]
+            # Se piden los parámetros que necesita la distribución elegida
             self.set_dist_parameters(dist)
+            # Agrega la distribución al diccionario de distribuciones en su ubicación asociada
             self.distribution_list["D"+str(i+1)] = dist
 
     def set_dist_parameters(self, dist):
-        if (dist.id == "Direct"):
+        """
+        Método de clase
+        Se inicializan los respectivos parámetros de la distribución: dist
+        """
+        if (dist.id == "Direct"): # ¿Es una distribución normal directa?
+            # Se inicializan los parámetros miu y sigma^2
             parameters = self.interface.ask_normal()
             dist.miu = parameters[0]
             dist.sigma2 = parameters[1]
-        elif (dist.id == "TLC"):
+        elif (dist.id == "TLC"): # ¿Es una distribución normal por el método de convolución?
+            # Se inicializan los parámetros miu y sigma^2
             parameters = self.interface.ask_normal()
             dist.miu = parameters[0]
             dist.sigma2 = parameters[1]
-        elif (dist.id == "Uniform"):
+        elif (dist.id == "Uniform"): # ¿Es una distribución uniforme?
+            # Se inicializan los parámetros a y b
             parameters = self.interface.ask_uniform()
             dist.a = parameters[0]
             dist.b = parameters[1]
-        elif (dist.id == "Exponential"):
+        elif (dist.id == "Exponential"): # ¿Es una distribución exponencial?
+            # Se inicializa el parámetro lambda
             parameters = self.interface.ask_exponential()
             dist.lambd = parameters
-        else:
+        else: # ¿Es una distribución de función de densidad?
+            # Se inicializan los parámetros k, a y b
             parameters = self.interface.ask_density()
             dist.k = parameters[0]
             dist.a = parameters[1]
             dist.b = parameters[2]
 
     def createEvents(self):
+        """
+        Método de clase
+        Se inicializan cada unos de los eventos que son necesarios para la simulación, los que tienen max están desprogramados
+        y los que tienen el valor de 0 están programados al momento 0 del reloj
+        """
         self.event_list["LMC1"] = (Event("LMC1", self.max))
         self.event_list["LMC2"] = (Event("LMC2", 0))
         self.event_list["LMC3"] = (Event("LMC3", 0))
@@ -122,39 +162,72 @@ class Simulation:
         self.event_list["SMC3"] = (Event("SMC3", self.max))
 
     def createComputers(self):
+        """
+        Método de clase
+        Se crean las computadoras y sus respectivos procesadores
+        """
+        # Se crea la computadora 1 y se inicializa su distribución de arribos en None y su identificador en 1
         self.computer_1 = Computer(1, None)
+        # Se crea el procesador con identificador 0 y distribución de salida D6
         self.computer_1.add_processor(0, self.distribution_list["D6"])
+        # Se agrega el procesador a la lista de procesadores
         self.processor_list.append(self.computer_1.processors_list[0])
 
+        # Se crea la computadora 2 y se inicializa su distribución de arribos en D1 y su identificador en 2
         self.computer_2 = Computer(2, self.distribution_list["D1"])
+        # Se crea el procesador con identificador 1 y distribución de salida D2
         self.computer_2.add_processor(1, self.distribution_list["D2"])
+        # Se crea el procesador con identificador 2 y distribución de salida D3
         self.computer_2.add_processor(2, self.distribution_list["D3"])
+        # Se agrega el procesador a la lista de procesadores
         self.processor_list.append(self.computer_2.processors_list[0])
+        # Se agrega el procesador a la lista de procesadores
         self.processor_list.append(self.computer_2.processors_list[1])
 
+        # Se crea la computadora 3 y se inicializa su distribución de arribos en D4 y su identificador en 3
         self.computer_3 = Computer(3, self.distribution_list["D4"])
+        # Se crea el procesador con identificador 3 y distribución de salida D5
         self.computer_3.add_processor(3, self.distribution_list["D5"])
+        # Se agrega el procesador a la lista de procesadores
         self.processor_list.append(self.computer_3.processors_list[0])
 
     def printStatistics(self, run_number):
+        """
+        Método de clase
+        Se realiza la impresión de las estádisticas correspondientes al número de corrida señalado
+        """
+        # Se imprime el porcentaje de tiempo que pasó el procesador ocupado en general y con mensajes rechazados
         self.interface.print_percentage_processor_busy(self.results.percentage_processor_busy_time(run_number))
         self.interface.print_percentage_processor_busy_rejected(self.results.percentage_processor_busy_rejected(run_number))
+        # Se imprime el porcentaje de mensajes rechazados
         self.interface.print_percentage_rejected_messages(self.results.percentage_rejected_messages(run_number))
-        
+
+        # Se imprime el promedio de tiempo en el sistema de un mensaje
         self.interface.print_mean_system_time(self.results.message_mean_system(run_number))
+        # Se imprime el promedio de la cantidad de veces que fue devuelto un mensaje
         self.interface.print_mean_amount_returned(self.results.message_mean_returned(run_number))
+        # Se imprime el promedio de tiempo en cola en el sistema de un mensaje
         self.interface.print_mean_queue_time(self.results.message_mean_queue(run_number))
+        # Se imprime el promedio de tiempo en transmisión en el sistema de un mensaje
         self.interface.print_mean_transmission_time(self.results.message_mean_transmission(run_number))
+        # Se imprime el promedio de tiempo en procesamiento en el sistema de un mensaje
         self.interface.print_percentage_in_processing_time(self.results.percentage_message_processing(run_number))
 
 
     def reset_run(self):
+        """
+        Método de clase
+        Reinicia todos los valores para poder iniciar la siguiente simulación
+        """
+        # Limpia la lista de mensajes
         del self.message_list[:]
 
+        # Limpia las listas ordenadas de mensajes por llegar a la computadora 1, 2 y 3
         self.LMC1_list.clear()
         self.LMC2_list.clear()
         self.LMC3_list.clear()
 
+        # Reinicia el valor inicial de todos los eventos
         self.event_list["LMC1"].event_time = self.max
         self.event_list["LMC2"].event_time = 0
         self.event_list["LMC3"].event_time = 0
@@ -163,44 +236,68 @@ class Simulation:
         self.event_list["SMC2P2"].event_time = self.max
         self.event_list["SMC3"].event_time = self.max
 
+        # Reinicia los valores de cada procesador
         for processor in self.processor_list:
             processor.busy_status = False
             processor.processing_time = 0.0
             processor.last_registered_clock = 0.0
-
+        
+        # Limpia las colas de mensajes
         self.computer_1.queued_messages.clear()
         self.computer_2.queued_messages.clear()
         self.computer_3.queued_messages.clear()
 
     def do_events(self):
+        """
+        Método de clase
+        Se realiza la ejecución correspondiente a una simulación
+        """
+        # Se indica que no ha terminado la corrida de la simulación
         run_finished = False
-        while(run_finished == False):
+        while(run_finished == False): # ¿No ha acabado la corrida de la simulación?
+            # Obtenga el mínimo de los eventos
             min_ocurrence_event = min(self.event_list, key=lambda x: self.event_list[x].event_time)
 
-            if (min_ocurrence_event == "LMC1"):
+            if (min_ocurrence_event == "LMC1"): # ¿Es el evento LMC1?
+                # Realice el evento
                 self.do_LMC1_event()
-            elif(min_ocurrence_event == "LMC2"):
+            elif(min_ocurrence_event == "LMC2"): # ¿Es el evento LMC2?
+                # Realice el evento
                 self.do_LMC2_event()
-            elif(min_ocurrence_event == "LMC3"):
+            elif(min_ocurrence_event == "LMC3"): # ¿Es el evento LMC3?
+                # Realice el evento
                 self.do_LMC3_event()
-            elif(min_ocurrence_event == "SMC1"):
+            elif(min_ocurrence_event == "SMC1"): # ¿Es el evento SMC1?
+                # Realice el evento
                 self.do_SMC1_event()
-            elif(min_ocurrence_event == "SMC2P1"):
+            elif(min_ocurrence_event == "SMC2P1"): # ¿Es el evento SMC2P1?
+                # Realice el evento
                 self.do_SMC2P1_event()
-            elif(min_ocurrence_event == "SMC2P2"):
+            elif(min_ocurrence_event == "SMC2P2"): # ¿Es el evento SMC2P2?
+                # Realice el evento
                 self.do_SMC2P2_event()
-            elif(min_ocurrence_event == "SMC3"):
+            elif(min_ocurrence_event == "SMC3"): # ¿Es el evento SMC3?
+                # Realice el evento
                 self.do_SMC3_event()
 
-            if (self.clock >= self.simulation_time):
+            if (self.clock >= self.simulation_time): # ¿Acabo el tiempo de simulación?
+                # indique que la simulación ya acabó
                 run_finished = True
         
+        # Actualice el tiempo de procesamiento de los procesadores que no terminaron de procesar
         self.update_remaining_processing_times()
         
     def update_remaining_processing_times(self):
-            for processor in self.processor_list:
-                if processor.busy_status == True:
-                    processor.update_processing_time(self.clock)
+        """
+        Método de clase
+        Se actualizan los tiempos de procesamiento de cada uno de los procesadores que no terminaron de trabajar al final
+        de la simulación
+        """
+        # Recorra cada uno de los procesadores
+        for processor in self.processor_list:
+            if processor.busy_status == True: # ¿El procesador estaba trabajando cuando terminó la simulación?
+                # Actualice su tiempo de procesamiento
+                processor.update_processing_time(self.clock)
 
     def do_LMC1_event(self):
         """
