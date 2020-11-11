@@ -72,7 +72,8 @@ class Simulation:
             # Se reinican los datos para una nueva corrida
             self.reset_run()
         # Imprimir estadisticas finales
-
+        self.print_final_statistics()
+        
     def get_user_input(self):
         """
         Método de clase

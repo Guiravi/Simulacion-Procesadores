@@ -221,7 +221,7 @@ class Interface:
         """
         Método para imprimir el número de corrida actual
         """
-        print("---------------------Corrida #%i---------------------\n" % run_number)
+        print("---------------------Corrida #%i---------------------\n" % (run_number+1))
     
     def print_percentage_processor_busy(self, percentages):
         """
