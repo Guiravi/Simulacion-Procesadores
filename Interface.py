@@ -1,6 +1,10 @@
 from os import system, name 
 
-def clear(): 
+def clear():
+    """
+    Método
+    Limpia todo lo que está escrito en la consola
+    """
   
     # for windows 
     if name == 'nt': 
@@ -214,33 +218,77 @@ class Interface:
         return probability
 
     def print_number_of_run(self, run_number):
+        """
+        Método para imprimir el número de corrida actual
+        """
         print("---------------------Corrida #%i---------------------\n" % run_number)
     
     def print_percentage_processor_busy(self, percentages):
+        """
+        Método que imprime los porcentajes de tiempo que pasa ocupado cada procesador del sistema
+        """
         print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 1: %.4f %%\n" % percentages[0])
         print("Porcentaje del tiempo que pasa ocupado el procesador 1 de la Computadora 2: %.4f %%\n" % percentages[1])
         print("Porcentaje del tiempo que pasa ocupado el procesador 2 de la Computadora 2: %.4f %%\n" % percentages[2])
         print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 3: %.4f %%\n" % percentages[3])
     
     def print_percentage_processor_busy_rejected(self, percentages):
+        """
+        Método que imprime los porcentajes de tiempo que pasan ocupados las computadoras en mensajes que se rechazan
+        """
         print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 1 en mensajes rechazados: %.4f %%\n" % percentages[0])
         print("Porcentaje del tiempo que pasa ocupado el procesador de la Computadora 3 en mensajes rechazados: %.4f %%\n" % percentages[1])
     
     def print_percentage_rejected_messages(self, percentage):
+        """
+        Método que imprime el porcentaje de mensajes que fue rechazado
+        """
         print("Porcentaje de mensajes que fueron rechazados: %.4f %%\n" % percentage)
 
     def print_mean_system_time(self, mean):
+        """
+        Método que imprime el tiempo promedio en el sistema de los mensajes
+        """
         print("Tiempo promedio en el sistema de los mensajes: %.4f s\n" % mean)
 
-    
     def print_mean_amount_returned(self, amount):
+        """
+        Método que imprime la cantidad de veces promedio que fue devuelto un mensaje
+        """
         print("Promedio de veces que fue devuelto un mensaje: %.4f \n" % amount)
     
     def print_mean_queue_time(self, mean):
+        """
+        Método que imprime el tiempo promedio en cola para los mensajes
+        """
         print("Tiempo promedio en cola de los mensajes: %.4f s\n" % mean)
     
     def print_mean_transmission_time(self, mean):
+        """
+        Método que imprime el tiempo promedio en transmisión de los mensajes
+        """
         print("Tiempo promedio en transmisión de los mensajes: %.4f s\n" % mean)
 
     def print_percentage_in_processing_time(self, percentage):
+        """
+        Método que imprime el porcentaje de tiempo que los mensajes pasan en procesamiento
+        """
         print("Porcentaje del tiempo en que los mensajes pasaron en procesamiento: %.4f %%\n" % percentage)
+    
+    def print_confidence_interval_rejected(self, confidence_interval):
+        """
+        Método que imprime el intervalo de confianza del tiempo promedio que pasan los mensajes rechazados en el sistema
+        """
+        print("El intervalo de confianza de tiempo promedio en el sistema para mensajes rechazados es de: [%.4f , %.4f]" % (confidence_interval[0], confidence_interval[1]))
+
+    def print_confidence_interval_sent(self, confidence_interval):
+        """
+        Método que imprime el intervalo de confianza del tiempo promedio que pasan los mensajes enviados en el sistema
+        """
+        print("El intervalo de confianza de tiempo promedio en el sistema para mensajes enviados es de: [%.4f , %.4f]" % (confidence_interval[0], confidence_interval[1]))
+
+    def print_confidence_interval_total(self, confidence_interval):
+        """
+        Método que imprime el intervalo de confianza del tiempo promedio que pasan todos los mensajes en el sistema 
+        """
+        print("El intervalo de confianza de tiempo promedio en el sistema para todos los mensajes es de: [%.4f , %.4f]" % (confidence_interval[0], confidence_interval[1]))

@@ -10,7 +10,7 @@ class Distribution:
     def __init__(self):
         self._id = "TBD"    # Indica la distribución que debe aplicarse"Direct", "TLC", "Uniform", "Exponential", "Density"
         self._miu = 0.0     # Valor miu utilizado para los cálculos de la distribución normal
-        self._sigma2 = 0.0  # Valor lambda^2 utilizaso para los cálculos de la distribución normal
+        self._sigma2 = 0.0  # Valor sigma^2 utilizaso para los cálculos de la distribución normal
         self._a = 0.0       # Valor a utilizado en la distribución de densidad y en la uniforme
         self._b = 0.0       # Valor b utilizado en la distribución de densidad y en la uniforme
         self._lambda = 0.0  # Valor utilizado en la distribución exponencial

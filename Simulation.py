@@ -67,12 +67,11 @@ class Simulation:
             self.results.add_messages_results(self.message_list)
             self.results.add_last_clock_of_run(self.clock)
             
-            # Imprimir estadisticas
-            self.printStatistics(i)
+            # Imprimir estadisticas de la corrida
+            self.print_statistics(i)
             # Se reinican los datos para una nueva corrida
             self.reset_run()
-        # Calcular estadisticas de todas las corridas
-        #Imprimir estadisticas finales
+        # Imprimir estadisticas finales
 
     def get_user_input(self):
         """
@@ -191,7 +190,7 @@ class Simulation:
         # Se agrega el procesador a la lista de procesadores
         self.processor_list.append(self.computer_3.processors_list[0])
 
-    def printStatistics(self, run_number):
+    def print_statistics(self, run_number):
         """
         Método de clase
         Se realiza la impresión de las estádisticas correspondientes al número de corrida señalado
@@ -213,6 +212,35 @@ class Simulation:
         # Se imprime el promedio de tiempo en procesamiento en el sistema de un mensaje
         self.interface.print_percentage_in_processing_time(self.results.percentage_message_processing(run_number))
 
+    def print_final_statistics(self):
+        """
+        Método de clase
+        Realiza la impresión de todas las estadísticas finales
+        """
+        print("---------------------ESTADÍSTICAS FINALES---------------------\n")
+        # Se imprime el porcentaje de tiempo que pasó el procesador ocupado en general y con mensajes rechazados
+        self.interface.print_percentage_processor_busy(self.results.finished_percentage_processor_busy_time())
+        self.interface.print_percentage_processor_busy_rejected(self.results.finished_percentage_processor_busy_rejected())
+        # Se imprime el porcentaje de mensajes rechazados
+        self.interface.print_percentage_rejected_messages(self.results.finished_percentage_rejected_messages())
+
+        # Se imprime el promedio de tiempo en el sistema de un mensaje
+        self.interface.print_mean_system_time(self.results.finished_message_mean_system())
+        # Se imprime el promedio de la cantidad de veces que fue devuelto un mensaje
+        self.interface.print_mean_amount_returned(self.results.finished_message_mean_returned())
+        # Se imprime el promedio de tiempo en cola en el sistema de un mensaje
+        self.interface.print_mean_queue_time(self.results.finished_message_mean_queue())
+        # Se imprime el promedio de tiempo en transmisión en el sistema de un mensaje
+        self.interface.print_mean_transmission_time(self.results.finished_message_mean_transmission())
+        # Se imprime el promedio de tiempo en procesamiento en el sistema de un mensaje
+        self.interface.print_percentage_in_processing_time(self.results.finished_percentage_message_processing())
+        
+        # Se imprime el intervalo de confianza para el tiempo promedio en el sistema de los mensajes rechazados
+        self.interface.print_confidence_interval_rejected(self.results.rejected_confidence_interval())
+        # Se imprime el intervalo de confianza para el tiempo promedio en el sistema de los mensajes enviados
+        self.interface.print_confidence_interval_sent(self.results.sent_confidence_interval())
+        # Se imprime el intervalo de confianza para el tiempo promedio en el sistema de todos los mensajes
+        self.interface.print_confidence_interval_total(self.results.total_confidence_interval())
 
     def reset_run(self):
         """
